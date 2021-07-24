@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>よくあるページ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>方程式の根</h1>
+    <div class="frame1">
+        <div class="left">
+            <div class="bisec_manage">
+                <h2>二分法</h2>
+                <button class="normal" onclick="bisecClick()">1コマ</button>
+                <button class="normal" onclick="bclearClick()">clear</button>
+                <input placeholder="ε" id="b_eps">
+                <button class="auto" onclick="bautoClick()">start</button>
+                <p>根 : <span id="bisec_c">0</span></p>
+                <p>計算回数 : <span id="bisec_count">0</span></p>
+            </div>
+            <div class="newton_manage">
+                <h2>ニュートン法</h2>
+                <button class="normal" onclick="newtonClick()">1コマ</button>
+                <button class="normal" onclick="nclearClick()">clear</button>
+                <input placeholder="ε" id="n_eps">
+                <button class="auto" onclick="nautoClick()">start</button>
+                <p>根 : <span id="newton_c">0</span></p>
+                <p>計算回数 : <span id="newton_count">0</span></p>
+            </div>
+        </div>
+        <div class="right">
+            <div class="bisec_graph">
+                <h2>二分法</h2>
+                <p>初期値：</p>
+                <p>a = <span id="bisec_a">0</span>,  b = <span id="bisec_b">0</span></p>
+                <canvas width="400" height="400" class="item" id="devide"></canvas>
+            </div>
+            <div class="newton_graph">
+                <h2>ニュートン法</h2>
+                <p>初期値：</p>
+                <p>a = <span id="newton_a">0</span></p>
+                <canvas width="400" height="400" class="item" id="newton"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="root.js"></script>
+    <script>
+
+        let r = new root();
+        const a = 70;
+        const b = 360;
+        let coord = [a, b]
+        let a_newton = b;
+        const canvas1 = document.querySelector('#devide');
+        const canvas2 = document.querySelector('#newton');
+        const ctx1 = canvas1.getContext('2d');
+        const ctx2 = canvas2.getContext('2d');
+        var bisec_a = document.getElementById("bisec_a");
+        var bisec_b = document.getElementById("bisec_b");
+        var newton_a = document.getElementById("newton_a");
+        bisec_a.textContent = a;
+        bisec_b.textContent = b;
+        newton_a.textContent = b;
+        let c;
+        let bcount = 0;
+        let ncount = 0;
+
+        function bclearClick(){
+            ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            let r = new root();
+            var bisec_root = document.getElementById("bisec_c");
+            var cnt = document.getElementById("bisec_count");
+            bisec_root.textContent = 0;
+            cnt.textContent = 0;
+            coord = [a, b];
+            bcount = 0;
+        }    
+
+        function bisecClick(){
+            c = r.useBisection(coord, ctx1);
+            var bisec_root = document.getElementById("bisec_c");
+            var cnt = document.getElementById("bisec_count");
+            bcount += 1;
+            bisec_root.textContent = c;
+            cnt.textContent = bcount;
+        }
+
+        function bautoClick(){
+            var text = document.getElementById("b_eps");
+            const value = text.value;
+            var bisec_root = document.getElementById("bisec_c");
+            var cnt = document.getElementById("bisec_count");
+            tmp = r.autoBisection(coord, ctx1, value);
+            bisec_root.textContent = tmp[0];
+            cnt.textContent = tmp[1];
+        }
+
+        function nclearClick(){
+            ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+            let r = new root();
+            var newton_root = document.getElementById("newton_c");
+            var cnt = document.getElementById("newton_count");
+            newton_root.textContent = 0;
+            cnt.textContent = 0;
+            a_newton = b;
+            ncount = 0;
+        }    
+
+        function newtonClick(){
+            a_newton = r.useNewton(a_newton, ctx2);
+            var bisec_root = document.getElementById("newton_c");
+            var cnt = document.getElementById("newton_count");
+            ncount += 1;
+            bisec_root.textContent = a_newton;
+            cnt.textContent = ncount;
+        }
+
+        function nautoClick(){
+            var text = document.getElementById("n_eps");
+            const value = text.value;
+            var newton_root = document.getElementById("newton_c");
+            var cnt = document.getElementById("newton_count");
+            tmp = r.autoNewton(a_newton, ctx2, value);
+            newton_root.textContent = tmp[0];
+            cnt.textContent = tmp[1];
+        }
+
+    </script>
+</body>
+</html>

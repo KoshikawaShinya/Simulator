@@ -1,0 +1,64 @@
+p {
+    margin: 8px 0px;
+}
+
+#bisec_a {
+    color: hsl(350, 97%, 71%);
+}
+#bisec_b {
+    color: #668fdb;
+}
+#newton_a {
+    color: hsl(350, 97%, 71%);
+}
+
+.item {
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 400px;
+    height: 400px;
+    border: solid 1px;
+}
+
+.frame1 {
+    display: flex;
+}
+
+.left {
+    flex-shrink: 0;
+    padding-left : 10px;
+    width : 250px;
+}
+
+.right {
+    display: flex;
+    margin-left: 20px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+.bisec_manage {
+    border-left: solid 10px #dcff40;
+    background : #fbffe8;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+
+.newton_manage {
+    margin-top: 50px;
+    border-left: solid 10px #22ffda;
+    background : #d7fffa;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+.bisec_graph {
+    padding: 0px 10px;
+    border-top: solid 5px #dcff40;
+    background : #fbffe8;
+}
+
+.newton_graph {
+    padding: 0px 10px;
+    border-top: solid 5px #22ffda;
+    background : #d7fffa;
+}
